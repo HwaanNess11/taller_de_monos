@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de Monos</title>
+</head>
+<body>
+    <h1 align="center">Taller de escritura de monos</h1>
+    <form action="taller.php" method="post" target="_blank">
+        <fieldset>
+            <legend><h4>Palabras que deseas buscar</h4></legend>
+            Introduce aquí las palabras: <input type="text" placeholder="Escribe aquí" name="texto" id="texto" size="50"/>
+            <br><br>
+            <!-- Nombre: <input type="text" placeholder="nombre" id="nombre" name="nombre" required/><br><br> -->
+            Modo del texto:
+            <select name="modo">
+                <option value="normal">Normal</option>
+                <option value="palabras">Palabras</option>
+                <option value="orden">Orden</option>
+            </select>
+            <br><br>
+            Zona horaria:
+            <select name="zona">
+                <option value="México - CDMX">CDMX</option>
+                <option value="Tailandia - Bangkok">Bangkok</option>
+                <option value="Australia - Sydney">Sydney</option>
+                <option value="Reino Unido - Londres">Londres</optoin>
+                <option value="Egipto - Cairo">Cairo</option>
+            </select>
+            <br><br>
+            <input type="submit"/>
+            <input type="reset"/>
+        </fieldset>
+    </form>
+</body>
+</html>
