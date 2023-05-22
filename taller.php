@@ -21,25 +21,74 @@
         }
     }
 
-    function modo_normal(){
+    function modo($normal, $orden){
+        
         $texto = (isset($_POST["texto"]) && $_POST["texto"] != "") ? $_POST["texto"] : "No hay texto";
-        $pos = rand(1,2100);
-        echo $pos, " ";
-        for($i=1;$i<=2100;$i++)
-        {
-            $carac = rand(65, 122);
-            echo chr($carac);
-            if($i%130 == 0)
-                echo "<br>";
-            if($i == $pos)
-            {
-                echo "<strong><font color=#0000ff>$texto</font></strong>";
-                $i = $i + strlen($texto);
+        $des = explode(" ", $texto);   //$desorden
+        $cont = count($des);      //$contador de palabras
+
+        if($normal==false){
+            do{
+                $hey = false;
+                for($i=0;$i<$cont;$i++){
+                    $pal[$i] = rand(1,2100);       //$localizador de palabra
+                }
+                if($orden==true){
+                    for($i=0; $i<$cont-1; $i++){
+                        if($pal[$i]>$pal[$i+1] && $hey==false)
+                            $hey = true;
+                    }
+                }
+                if($hey==false){
+                    for($i=0;$i<$cont;$i++){
+                        for($i2=0; $i2<$cont; $i2++){
+                            if($i!=$i2 && $pal[$i]==$pal[$i2]) //detecta que un localizador no coincida con otro
+                                $hey = true;
+                        }
+                    }
+                }
+            }
+            while($hey==true);
+
+            for($i=1;$i<=2100;$i++){
+                $carac = rand(65, 122);
+                echo chr($carac);
+                if($i%200 == 0)
+                    echo "<br>";
+                if($i%25 == 0)
+                    echo " ";
+                for($i2=0;$i2<$cont;$i2++){
+                    if($i == $pal[$i2])
+                        echo "<strong><font color=#0000ff>$des[$i2]</font></strong>";
+                }
+            }
+        }
+
+        else{
+            $pos = rand(1,2100);
+            for($i=1;$i<=2100;$i++){
+                $carac = rand(65, 122);
+                echo chr($carac);
+                if($i%200 == 0)
+                    echo "<br>";
+                if($i%25 == 0)
+                    echo " ";
+                if($i == $pos){
+                    echo "<strong><font color=#0000ff>$texto</font></strong>";
+                    $i = $i + strlen($texto);
+                }
             }
         }
     }
 
-    
+    $orden = false;
+    if($modo=='normal')
+        $normal = true;
+    else{
+        $normal = false;
+        if($modo=='orden')
+            $orden = true;
+    }
 
     echo "<table border=1 cellpadding=15px align=center>
     <thead>
@@ -49,7 +98,7 @@
     </thead>
     <tbody>
         <tr>
-            <td align=center>", modo_normal(), "</td>
+            <td align=center>", modo($normal, $orden), "</td>
         </tr>
     </tbody>
     </table><br>";
